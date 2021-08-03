@@ -5,8 +5,7 @@ import re
 import bs4
 import requests
 import simplebot
-from simplebot import DeltaBot
-from simplebot.bot import Replies
+from simplebot.bot import DeltaBot, Replies
 
 __version__ = "1.0.0"
 HEADERS = {
