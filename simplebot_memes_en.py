@@ -62,8 +62,7 @@ def _get_meme(bot: DeltaBot, get_image: Callable) -> dict:
                 img = resp.content
                 ext = _get_ext(resp) or ".jpg"
 
-    text = "{}\n\n{}".format(img_desc, img_url)
-    return dict(text=text, filename="meme" + ext, bytefile=io.BytesIO(img))
+    return dict(text=img_desc, filename="meme" + ext, bytefile=io.BytesIO(img))
 
 
 def _get_ext(resp: requests.Response) -> str:
