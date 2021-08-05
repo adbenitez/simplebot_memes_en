@@ -93,5 +93,4 @@ def _getdefault(bot: DeltaBot, key: str, value=None) -> str:
 class TestPlugin:
     def test_memecenter(self, mocker):
         msg = mocker.get_one_reply("/memecenter")
-        assert msg.filename
-        # assert msg.is_image()
+        assert msg.is_image()
