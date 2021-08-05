@@ -5,9 +5,14 @@ import re
 import bs4
 import requests
 import simplebot
+from pkg_resources import DistributionNotFound, get_distribution
 from simplebot.bot import DeltaBot, Replies
 
-__version__ = "1.0.0"
+try:
+    __version__ = get_distribution(__name__).version
+except DistributionNotFound:
+    # package is not installed
+    __version__ = "0.0.0.dev0-unknown"
 HEADERS = {
     "user-agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:60.0)"
     " Gecko/20100101 Firefox/60.0"
