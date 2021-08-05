@@ -37,7 +37,7 @@ if __name__ == "__main__":
         long_description_content_type="text/x-rst",
         author="The SimpleBot Contributors",
         author_email="adbenitez@nauta.cu",
-        url="https://github.com/simplebot-org/simplebot_memes_en",
+        url=f"https://github.com/adbenitez/{MODULE_NAME}",
         keywords="simplebot plugin deltachat",
         license="MPL",
         classifiers=[
