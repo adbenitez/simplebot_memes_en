@@ -23,7 +23,7 @@ if __name__ == "__main__":
     MODULE_NAME = "simplebot_memes_en"
     DESC = "Get random memes in English (SimpleBot plugin)"
 
-    with open("README.rst") as fh:
+    with open("README.rst", encoding="utf-8") as fh:
         long_description = fh.read()
 
     setup(
@@ -38,7 +38,7 @@ if __name__ == "__main__":
         description=DESC,
         long_description=long_description,
         long_description_content_type="text/x-rst",
-        author="The SimpleBot Contributors",
+        author="adbenitez",
         author_email="adbenitez@nauta.cu",
         url=f"https://github.com/adbenitez/{MODULE_NAME}",
         keywords="simplebot plugin deltachat",
