@@ -1,5 +1,6 @@
 """Plugin's hooks and commands definitions."""
 
+import functools
 import io
 import mimetypes
 import re
@@ -16,10 +17,13 @@ try:
 except DistributionNotFound:
     # package is not installed
     __version__ = "0.0.0.dev0-unknown"
-HEADERS = {
-    "user-agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:60.0)"
-    " Gecko/20100101 Firefox/60.0"
-}
+session = requests.Session()
+session.headers.update(
+    {
+        "user-agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0"
+    }
+)
+session.request = functools.partial(session.request, timeout=15)  # type: ignore
 
 
 @simplebot.hookimpl
@@ -35,11 +39,11 @@ def memecenter(bot: DeltaBot, replies: Replies) -> None:
 
 def _get_image() -> tuple:
     url = "https://www.memecenter.com"
-    with requests.get(url, headers=HEADERS) as resp:
+    with session.get(url) as resp:
         resp.raise_for_status()
         soup = bs4.BeautifulSoup(resp.text, "html.parser")
     url = soup.find("a", class_="random")["href"]
-    with requests.get(url, headers=HEADERS) as resp:
+    with session.get(url) as resp:
         resp.raise_for_status()
         soup = bs4.BeautifulSoup(resp.text, "html.parser")
     img_desc = soup.title.get_text().strip()
@@ -52,7 +56,7 @@ def _get_meme(bot: DeltaBot, get_image: Callable) -> dict:
     max_meme_size = int(_getdefault(bot, "max_meme_size"))
     for _ in range(10):
         img_desc, img_url = get_image()
-        with requests.get(img_url, headers=HEADERS) as resp:
+        with session.get(img_url) as resp:
             resp.raise_for_status()
             if len(resp.content) <= max_meme_size:
                 img = resp.content

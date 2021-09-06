@@ -5,6 +5,7 @@ Changelog
 -------------
 
 - the image URL is no longer sent in the message.
+- added timeouts to avoid hanging forever.
 
 1.0.0
 -----
