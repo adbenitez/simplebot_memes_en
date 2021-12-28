@@ -101,4 +101,4 @@ class TestPlugin:
 
     def test_memecenter(self, mocker):
         msg = mocker.get_one_reply("/memecenter")
-        assert msg.is_image()
+        assert msg.filename
