@@ -7,7 +7,7 @@ from setuptools import setup
 
 def load_requirements(path: str) -> list:
     """Load requirements from the given relative path."""
-    with open(path, encoding="utf-8") as file:  # noqa
+    with open(path, encoding="utf-8") as file:
         requirements = []
         for line in file.read().split("\n"):
             if line.startswith("-r"):
@@ -60,6 +60,6 @@ if __name__ == "__main__":
             "dev": load_requirements("requirements/requirements-dev.txt"),
         },
         entry_points={
-            "simplebot.plugins": "{0} = {0}".format(MODULE_NAME),
+            "simplebot.plugins": f"{MODULE_NAME} = {MODULE_NAME}",
         },
     )
